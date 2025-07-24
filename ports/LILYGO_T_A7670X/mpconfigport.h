@@ -79,7 +79,7 @@
 #define MICROPY_PY_IO_BUFFEREDWRITER        (1)
 #define MICROPY_PY_TIME_GMTIME_LOCALTIME_MKTIME (1)
 #define MICROPY_PY_TIME_TIME_TIME_NS        (1)
-#define MICROPY_PY_TIME_INCLUDEFILE         "ports/esp32/modtime.c"
+#define MICROPY_PY_TIME_INCLUDEFILE         "ports/LILYGO_T_A7670X/modtime.c"
 #define MICROPY_PY_THREAD                   (1)
 #define MICROPY_PY_THREAD_GIL               (1)
 #define MICROPY_PY_THREAD_GIL_VM_DIVISOR    (32)
@@ -106,32 +106,32 @@
 #define MICROPY_PY_HASHLIB_SHA256           (1)
 #define MICROPY_PY_CRYPTOLIB                (1)
 #define MICROPY_PY_RANDOM_SEED_INIT_FUNC    (esp_random())
-#define MICROPY_PY_OS_INCLUDEFILE           "ports/esp32/modos.c"
+#define MICROPY_PY_OS_INCLUDEFILE           "ports/LILYGO_T_A7670X/modos.c"
 #define MICROPY_PY_OS_DUPTERM               (1)
 #define MICROPY_PY_OS_DUPTERM_NOTIFY        (1)
 #define MICROPY_PY_OS_SYNC                  (1)
 #define MICROPY_PY_OS_UNAME                 (1)
 #define MICROPY_PY_OS_URANDOM               (1)
 #define MICROPY_PY_MACHINE                  (1)
-#define MICROPY_PY_MACHINE_INCLUDEFILE      "ports/esp32/modmachine.c"
+#define MICROPY_PY_MACHINE_INCLUDEFILE      "ports/LILYGO_T_A7670X/modmachine.c"
 #define MICROPY_PY_MACHINE_RESET            (1)
 #define MICROPY_PY_MACHINE_BARE_METAL_FUNCS (1)
 #define MICROPY_PY_MACHINE_DISABLE_IRQ_ENABLE_IRQ (1)
 #define MICROPY_PY_MACHINE_ADC              (1)
-#define MICROPY_PY_MACHINE_ADC_INCLUDEFILE  "ports/esp32/machine_adc.c"
+#define MICROPY_PY_MACHINE_ADC_INCLUDEFILE  "ports/LILYGO_T_A7670X/machine_adc.c"
 #define MICROPY_PY_MACHINE_ADC_ATTEN_WIDTH  (1)
 #define MICROPY_PY_MACHINE_ADC_INIT         (1)
 #define MICROPY_PY_MACHINE_ADC_READ         (1)
 #define MICROPY_PY_MACHINE_ADC_READ_UV      (1)
 #define MICROPY_PY_MACHINE_ADC_BLOCK        (1)
-#define MICROPY_PY_MACHINE_ADC_BLOCK_INCLUDEFILE "ports/esp32/machine_adc_block.c"
+#define MICROPY_PY_MACHINE_ADC_BLOCK_INCLUDEFILE "ports/LILYGO_T_A7670X/machine_adc_block.c"
 #define MICROPY_PY_MACHINE_PIN_MAKE_NEW     mp_pin_make_new
 #define MICROPY_PY_MACHINE_BITSTREAM        (1)
 #define MICROPY_PY_MACHINE_DHT_READINTO     (1)
 #define MICROPY_PY_MACHINE_PULSE            (1)
 #define MICROPY_PY_MACHINE_PWM              (1)
 #define MICROPY_PY_MACHINE_PWM_DUTY         (1)
-#define MICROPY_PY_MACHINE_PWM_INCLUDEFILE  "ports/esp32/machine_pwm.c"
+#define MICROPY_PY_MACHINE_PWM_INCLUDEFILE  "ports/LILYGO_T_A7670X/machine_pwm.c"
 #define MICROPY_PY_MACHINE_I2C              (1)
 #define MICROPY_PY_MACHINE_I2C_TRANSFER_WRITE1 (1)
 #define MICROPY_PY_MACHINE_SOFTI2C          (1)
@@ -145,15 +145,15 @@
 #ifndef MICROPY_PY_MACHINE_I2S
 #define MICROPY_PY_MACHINE_I2S              (SOC_I2S_SUPPORTED)
 #endif
-#define MICROPY_PY_MACHINE_I2S_INCLUDEFILE  "ports/esp32/machine_i2s.c"
+#define MICROPY_PY_MACHINE_I2S_INCLUDEFILE  "ports/LILYGO_T_A7670X/machine_i2s.c"
 #define MICROPY_PY_MACHINE_I2S_FINALISER    (1)
 #define MICROPY_PY_MACHINE_I2S_CONSTANT_RX  (I2S_DIR_RX)
 #define MICROPY_PY_MACHINE_I2S_CONSTANT_TX  (I2S_DIR_TX)
 #define MICROPY_PY_MACHINE_UART             (1)
-#define MICROPY_PY_MACHINE_UART_INCLUDEFILE "ports/esp32/machine_uart.c"
+#define MICROPY_PY_MACHINE_UART_INCLUDEFILE "ports/LILYGO_T_A7670X/machine_uart.c"
 #define MICROPY_PY_MACHINE_UART_SENDBREAK   (1)
 #define MICROPY_PY_MACHINE_WDT              (1)
-#define MICROPY_PY_MACHINE_WDT_INCLUDEFILE  "ports/esp32/machine_wdt.c"
+#define MICROPY_PY_MACHINE_WDT_INCLUDEFILE  "ports/LILYGO_T_A7670X/machine_wdt.c"
 #define MICROPY_PY_NETWORK (1)
 #ifndef MICROPY_PY_NETWORK_HOSTNAME_DEFAULT
 #if CONFIG_IDF_TARGET_ESP32
@@ -166,8 +166,8 @@
 #define MICROPY_PY_NETWORK_HOSTNAME_DEFAULT "mpy-esp32c3"
 #endif
 #endif
-#define MICROPY_PY_NETWORK_INCLUDEFILE      "ports/esp32/modnetwork.h"
-#define MICROPY_PY_NETWORK_MODULE_GLOBALS_INCLUDEFILE "ports/esp32/modnetwork_globals.h"
+#define MICROPY_PY_NETWORK_INCLUDEFILE      "ports/LILYGO_T_A7670X/modnetwork.h"
+#define MICROPY_PY_NETWORK_MODULE_GLOBALS_INCLUDEFILE "ports/LILYGO_T_A7670X/modnetwork_globals.h"
 #ifndef MICROPY_PY_NETWORK_WLAN
 #define MICROPY_PY_NETWORK_WLAN             (1)
 #endif
@@ -254,7 +254,7 @@ typedef long mp_off_t;
 #include <sys/types.h>
 
 // board specifics
-#define MICROPY_PY_SYS_PLATFORM "esp32"
+#define MICROPY_PY_SYS_PLATFORM "LILYGO_T_A7670X"
 
 // ESP32-S3 extended IO for 47 & 48
 #ifndef MICROPY_HW_ESP32S3_EXTENDED_IO

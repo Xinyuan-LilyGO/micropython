@@ -5,7 +5,7 @@ endif()
 
 # Set location of the ESP32 port directory.
 if(NOT MICROPY_PORT_DIR)
-    get_filename_component(MICROPY_PORT_DIR ${MICROPY_DIR}/ports/esp32 ABSOLUTE)
+    get_filename_component(MICROPY_PORT_DIR ${MICROPY_DIR}/ports/LILYGO_T_SIM767XG_S3 ABSOLUTE)
 endif()
 
 # Include core source components.
