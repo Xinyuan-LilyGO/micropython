@@ -1,153 +1,257 @@
-# Micropython + LVGL
+<div align="center" markdown="1">
+  <img src="./images/LilyGo_logo.png" alt="LilyGo logo" width="100"/>
+</div>
+<h1 align = "center">🌟LilyGo-MicroPython🌟</h1>
 
-**Micropython bindings to LVGL for Embedded devices, Unix and JavaScript**
+# 1️⃣ **Windows subsystem for linux(WSL)**
 
-More information about MicroPython-LVGL binding and how to build it, see: [README-LVGL.md](README-LVGL.md)
+1. Control Panel -> Programs and Features -> Enable or Disable windows Features. Open the Windows Features dialog box, select the "Windows Subsystem for Linux" TAB, and click "OK" to wait for the system configuration to complete.
 
----
+   ![1](./images/1.png)
 
-The MicroPython project
-=======================
-<p align="center">
-  <img src="https://raw.githubusercontent.com/micropython/micropython/master/logo/upython-with-micro.jpg" alt="MicroPython Logo"/>
-</p>
+2. Open Microsoft Store.
 
-This is the MicroPython project, which aims to put an implementation
-of Python 3.x on microcontrollers and small embedded systems.
-You can find the official website at [micropython.org](http://www.micropython.org).
+   ![2](./images/2.png)
 
-WARNING: this project is in beta stage and is subject to changes of the
-code-base, including project-wide name changes and API changes.
+3. Search for "ubuntu 22.04.5" and install it as prompted.
 
-MicroPython implements the entire Python 3.4 syntax (including exceptions,
-`with`, `yield from`, etc., and additionally `async`/`await` keywords from
-Python 3.5 and some select features from later versions). The following core
-datatypes are provided: `str`(including basic Unicode support), `bytes`,
-`bytearray`, `tuple`, `list`, `dict`, `set`, `frozenset`, `array.array`,
-`collections.namedtuple`, classes and instances. Builtin modules include
-`os`, `sys`, `time`, `re`, and `struct`, etc. Some ports have support for
-`_thread` module (multithreading), `socket` and `ssl` for networking, and
-`asyncio`. Note that only a subset of Python 3 functionality is implemented
-for the data types and modules.
+   ![3](./images/3.png)
 
-MicroPython can execute scripts in textual source form (.py files) or from
-precompiled bytecode (.mpy files), in both cases either from an on-device
-filesystem or "frozen" into the MicroPython executable.
+4. Open the downloaded "ubuntu 22.04.5" and display "Installing, this may take a few minutes..." .
 
-MicroPython also provides a set of MicroPython-specific modules to access
-hardware-specific functionality and peripherals such as GPIO, Timers, ADC,
-DAC, PWM, SPI, I2C, CAN, Bluetooth, and USB.
+   ![4](./images/4.png)
 
-Getting started
----------------
+   Wait for a moment and then enter the username:
 
-See the [online documentation](https://docs.micropython.org/) for the API
-reference and information about using MicroPython and information about how
-it is implemented.
+   ![5](./images/5.png)
 
-We use [GitHub Discussions](https://github.com/micropython/micropython/discussions)
-as our forum, and [Discord](https://discord.gg/RB8HZSAExQ) for chat. These
-are great places to ask questions and advice from the community or to discuss your
-MicroPython-based projects.
+   Then enter the password twice (remember the password you set here) :
 
-For bugs and feature requests, please [raise an issue](https://github.com/micropython/micropython/issues/new/choose)
-and follow the templates there.
+   ![8](./images/8.png)
 
-For information about the [MicroPython pyboard](https://store.micropython.org/pyb-features),
-the officially supported board from the
-[original Kickstarter campaign](https://www.kickstarter.com/projects/214379695/micro-python-python-for-microcontrollers),
-see the [schematics and pinouts](http://github.com/micropython/pyboard) and
-[documentation](https://docs.micropython.org/en/latest/pyboard/quickref.html).
+   After setting it up, you can successfully enter the WSL Ubuntu system.
 
-Contributing
-------------
+   ![9](./images/9.png)
 
-MicroPython is an open-source project and welcomes contributions. To be
-productive, please be sure to follow the
-[Contributors' Guidelines](https://github.com/micropython/micropython/wiki/ContributorGuidelines)
-and the [Code Conventions](https://github.com/micropython/micropython/blob/master/CODECONVENTIONS.md).
-Note that MicroPython is licenced under the MIT license, and all contributions
-should follow this license.
 
-About this repository
----------------------
 
-This repository contains the following components:
-- [py/](py/) -- the core Python implementation, including compiler, runtime, and
-  core library.
-- [mpy-cross/](mpy-cross/) -- the MicroPython cross-compiler which is used to turn scripts
-  into precompiled bytecode.
-- [ports/](ports/) -- platform-specific code for the various ports and architectures that MicroPython runs on.
-- [lib/](lib/) -- submodules for external dependencies.
-- [tests/](tests/) -- test framework and test scripts.
-- [docs/](docs/) -- user documentation in Sphinx reStructuredText format. This is used to generate the [online documentation](http://docs.micropython.org).
-- [extmod/](extmod/) -- additional (non-core) modules implemented in C.
-- [tools/](tools/) -- various tools, including the pyboard.py module.
-- [examples/](examples/) -- a few example Python scripts.
+# 2️⃣ Download MobaXterm (terminal tool) and connect
 
-"make" is used to build the components, or "gmake" on BSD-based systems.
-You will also need bash, gcc, and Python 3.3+ available as the command `python3`
-(if your system only has Python 2.7 then invoke make with the additional option
-`PYTHON=python2`). Some ports (rp2 and esp32) additionally use CMake.
+1. Open the [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html) website to download terminal tool.
 
-Supported platforms & architectures
------------------------------------
+   ![10](./images/10.png)
 
-MicroPython runs on a wide range of microcontrollers, as well as on Unix-like
-(including Linux, BSD, macOS, WSL) and Windows systems.
+2. After the download is complete, extract it and open the "MobaXterm_installer_25.2.msi" installation package in the folder. Follow the prompts to complete the installation.
 
-Microcontroller targets can be as small as 256kiB flash + 16kiB RAM, although
-devices with at least 512kiB flash + 128kiB RAM allow a much more
-full-featured experience.
+   ![10-1](./images/10-1.png)
 
-The [Unix](ports/unix) and [Windows](ports/windows) ports allow both
-development and testing of MicroPython itself, as well as providing
-lightweight alternative to CPython on these platforms (in particular on
-embedded Linux systems).
+3. After opening the software, select "Session" to connect.
 
-The ["minimal"](ports/minimal) port provides an example of a very basic
-MicroPython port and can be compiled as both a standalone Linux binary as
-well as for ARM Cortex M4. Start with this if you want to port MicroPython to
-another microcontroller. Additionally the ["bare-arm"](ports/bare-arm) port
-is an example of the absolute minimum configuration, and is used to keep
-track of the code size of the core runtime and VM.
+   ![11](./images/11.png)
 
-In addition, the following ports are provided in this repository:
- - [cc3200](ports/cc3200) -- Texas Instruments CC3200 (including PyCom WiPy).
- - [esp32](ports/esp32) -- Espressif ESP32 SoC (including ESP32S2, ESP32S3, ESP32C3, ESP32C6).
- - [esp8266](ports/esp8266) -- Espressif ESP8266 SoC.
- - [mimxrt](ports/mimxrt) -- NXP m.iMX RT (including Teensy 4.x).
- - [nrf](ports/nrf) -- Nordic Semiconductor nRF51 and nRF52.
- - [pic16bit](ports/pic16bit) -- Microchip PIC 16-bit.
- - [powerpc](ports/powerpc) -- IBM PowerPC (including Microwatt)
- - [qemu](ports/qemu) -- QEMU-based emulated target (for testing)
- - [renesas-ra](ports/renesas-ra) -- Renesas RA family.
- - [rp2](ports/rp2) -- Raspberry Pi RP2040 (including Pico and Pico W).
- - [samd](ports/samd) -- Microchip (formerly Atmel) SAMD21 and SAMD51.
- - [stm32](ports/stm32) -- STMicroelectronics STM32 family (including F0, F4, F7, G0, G4, H7, L0, L4, WB)
- - [webassembly](ports/webassembly) -- Emscripten port targeting browsers and NodeJS.
- - [zephyr](ports/zephyr) -- Zephyr RTOS.
+4. First, select WSL. Then, in Distribution, choose the corresponding Ubuntu version to download and click ok.
 
-The MicroPython cross-compiler, mpy-cross
------------------------------------------
+   ![12](./images/12.png)
 
-Most ports require the [MicroPython cross-compiler](mpy-cross) to be built
-first.  This program, called mpy-cross, is used to pre-compile Python scripts
-to .mpy files which can then be included (frozen) into the
-firmware/executable for a port.  To build mpy-cross use:
+5. Successfully entered the WSL Ubuntu system.
 
-    $ cd mpy-cross
-    $ make
+   ![13](./images/13.png)
 
-External dependencies
----------------------
+   
 
-The core MicroPython VM and runtime has no external dependencies, but a given
-port might depend on third-party drivers or vendor HALs. This repository
-includes [several submodules](lib/) linking to these external dependencies.
-Before compiling a given port, use
+# 3️⃣ Configure the python environment
 
-    $ cd ports/name
-    $ make submodules
+1. Point `/usr/bin/python` to `/usr/bin/python3`.
 
-to ensure that all required submodules are initialised.
+   ```
+   sudo ln -s /usr/bin/python3 /usr/bin/python
+   ```
+
+Enter the password you just set:
+
+![14](./images/14.png)
+
+2. Update the software package list.
+
+   ```
+   sudo apt-get update
+   ```
+
+   ![16](./images/16.png)
+
+   Update completed:
+
+   ![17](./images/17.png)
+
+3. Installation environment:
+
+   ```
+   sudo apt-get install git wget libncurses-dev flex bison gperf python3 python3-pip python3-setuptools python3-serial python3-click python3-cryptography python3-future python3-pyparsing python3-pyelftools cmake ninja-build ccache libffi-dev libssl-dev python-is-python3
+   ```
+
+   ![18](./images/18.png)
+
+   Installation completed:
+
+   ![19](./images/19.png)
+
+4. Install "python3.10-venv".
+
+   ```
+   sudo apt install python3.10-venv
+   ```
+
+   ![19-1](./images/19-1.png)
+
+   Installation completed:
+
+   ![19-3](./images/19-3.png)
+
+   
+
+# 4️⃣ **Esp-idf development environment**
+
+1. Execute the following instructions in sequence in the command line mode of the linux subsystem:
+
+   ```
+   git clone https://github.com/Xinyuan-LilyGO/esp-gitee-tools.git
+   ```
+
+   ![21](./images/21.png)
+
+   ```
+   git clone https://github.com/Xinyuan-LilyGO/esp-idf.git
+   ```
+
+   ![23](./images/23.png)
+
+2. Enter the "esp-idf" folder.
+
+   ```
+   cd esp-idf
+   ```
+
+   ![24](./images/24.png)
+
+3. Switch branches.
+
+   ```
+   git checkout v5.2.2
+   ```
+
+   ![26](./images/26.png)
+
+4. Enter the "esp-gitee-tools" folder.
+
+   ```
+   cd ../esp-gitee-tools
+   ```
+
+   ![27](./images/27.png)
+
+5. Execute the script "submodule-update.sh".
+
+   ```
+   ./submodule-update.sh ~/esp-idf/
+   ```
+
+   ![28](./images/28.png)
+
+   Run completed:
+
+   ![29](./images/29.png)
+
+6. Execute the "install.sh" script.
+
+   ```
+   ./install.sh ~/esp-idf/
+   ```
+
+   ![30](./images/30.png)
+
+   Run completed:
+
+   ![31](./images/31.png)
+
+7. Configure environment variables.
+
+   ```
+   . /home/lilygo-micropython/esp-idf/export.sh
+   ```
+
+   ![32](./images/32.png)
+
+   Configuration completed:
+
+   ![33](./images/33.png)
+
+   
+
+# 5️⃣ **Make the MicroPython firmware**
+
+1. Exit the current folder and download micropython.
+
+   ```
+   cd ~
+   ```
+
+   ```
+   git clone https://github.com/Xinyuan-LilyGO/micropython.git
+   ```
+
+   ![34](./images/34.png)
+
+   Download completed. (If the download fails, please try again):
+
+   ![35](./images/35.png)
+
+2. Enter the micropython folder and compile the "mpy-cross" tool.
+
+   ```
+   cd micropython
+   ```
+
+   ```
+   make -C mpy-cross
+   ```
+
+   ![36](./images/36.png)
+
+   Compilation completed:
+   ![37](./images/37.png)
+
+3. Enter the corresponding development board folder ("ports/xxx"), here taking "LILYGO_T_Connect_Pro_S3" as an example.
+
+   ```
+   cd ports/LILYGO_T_Connect_Pro_S3
+   ```
+
+   ![38](./images/38.png)
+
+4. Initialize the sub-module.
+
+   ```
+   make submodules
+   ```
+
+   ![39](./images/39.png)
+
+5. Make the firmware.
+
+   ```
+   make
+   ```
+
+   ![40](./images/40.png)
+
+   Make completed：
+
+   ![41](./images/41.png)
+
+6. Download the compiled firmware and click the mouse to enter the "build-ESP32_GENERIC_S3" folder (if you are using ESP32, the folder name is "build-ESP32_GENERIC").
+
+   ![41-1](./images/41-1.png)
+
+7. In the file, find the "firmware.bin" file, right-click the mouse, and select "Download" to download it to your computer.
+
+   ![42](./images/42.png)
