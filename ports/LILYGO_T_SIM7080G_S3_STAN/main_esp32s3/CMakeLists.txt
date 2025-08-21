@@ -8,6 +8,4 @@ if(NOT MICROPY_PORT_DIR)
     get_filename_component(MICROPY_PORT_DIR ${MICROPY_DIR}/ports/LILYGO_T_SIM7080G_S3_STAN ABSOLUTE)
 endif()
 
-set(MICROPY_PY_TINYUSB ON)
-
 include(${MICROPY_PORT_DIR}/esp32_common.cmake)
