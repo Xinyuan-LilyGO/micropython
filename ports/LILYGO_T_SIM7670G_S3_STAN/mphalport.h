@@ -54,7 +54,10 @@ extern TaskHandle_t mp_main_task_handle;
 
 extern ringbuf_t stdin_ringbuf;
 
-extern portMUX_TYPE mp_atomic_mux;
+extern const struct _mp_obj_module_t mp_module_camera;
+
+#define MICROPY_PORT_BUILTIN_MODULES \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_camera), (mp_obj_t)&mp_module_camera }, \
 
 // Check the ESP-IDF error code and raise an OSError if it's not ESP_OK.
 #if MICROPY_ERROR_REPORTING <= MICROPY_ERROR_REPORTING_NORMAL
@@ -65,26 +68,17 @@ void check_esp_err_(esp_err_t code);
 void check_esp_err_(esp_err_t code, const char *func, const int line, const char *file);
 #endif
 
-static inline mp_uint_t mp_begin_atomic_section(void) {
-    portENTER_CRITICAL(&mp_atomic_mux);
-    return 0;
-}
-
-static inline void mp_end_atomic_section(mp_uint_t state) {
-    (void)state;
-    portEXIT_CRITICAL(&mp_atomic_mux);
-}
-
-// Note: These atomic macros disable interrupts on the calling CPU, and on SMP
-// systems also protect against concurrent access to an atomic section on the
-// other CPU.
-#define MICROPY_BEGIN_ATOMIC_SECTION() mp_begin_atomic_section()
-#define MICROPY_END_ATOMIC_SECTION(state) mp_end_atomic_section(state)
+// Note: these "critical nested" macros do not ensure cross-CPU exclusion,
+// the only disable interrupts on the current CPU.  To full manage exclusion
+// one should use portENTER_CRITICAL/portEXIT_CRITICAL instead.
+#include "freertos/FreeRTOS.h"
+#define MICROPY_BEGIN_ATOMIC_SECTION() portSET_INTERRUPT_MASK_FROM_ISR()
+#define MICROPY_END_ATOMIC_SECTION(state) portCLEAR_INTERRUPT_MASK_FROM_ISR(state)
 
 uint32_t mp_hal_ticks_us(void);
 __attribute__((always_inline)) static inline uint32_t mp_hal_ticks_cpu(void) {
     uint32_t ccount;
-    #if CONFIG_IDF_TARGET_ARCH_RISCV
+    #if CONFIG_IDF_TARGET_ESP32C3
     __asm__ __volatile__ ("csrr %0, 0x7E2" : "=r" (ccount)); // Machine Performance Counter Value
     #else
     __asm__ __volatile__ ("rsr %0,ccount" : "=a" (ccount));

@@ -50,6 +50,7 @@
 
 #if MICROPY_PY_ESPNOW
 
+#include "mphalport.h"
 #include "modnetwork.h"
 #include "modespnow.h"
 

@@ -10,7 +10,10 @@ BOARD ?= $(notdir $(BOARD_DIR:/=))
 else
 # If not given on the command line, then default to ESP32_GENERIC.
 #BOARD ?= ESP32_GENERIC
+#BOARD ?= ESP32_CAM
 BOARD ?= ESP32_GENERIC_S3
+
+
 BOARD_DIR ?= boards/$(BOARD)
 endif
 
@@ -30,13 +33,8 @@ BUILD ?= build-$(BOARD)
 endif
 
 # Device serial settings.
-ifneq ($(PORT),)
-PORT_ARG := -p $(PORT)
-endif
-ifneq ($(BAUD),)
-BAUD_ARG := -b $(BAUD)
-endif
-DEVICE += $(PORT_ARG) $(BAUD_ARG)
+PORT ?= /dev/ttyUSB0
+BAUD ?= 460800
 
 PYTHON ?= python3
 
@@ -65,7 +63,7 @@ endif
 HELP_BUILD_ERROR ?= "See \033[1;31mhttps://github.com/micropython/micropython/wiki/Build-Troubleshooting\033[0m"
 
 define RUN_IDF_PY
-	idf.py $(IDFPY_FLAGS) -B $(BUILD) $(1)
+	idf.py $(IDFPY_FLAGS) -B $(BUILD) -p $(PORT) -b $(BAUD) $(1)
 endef
 
 all:
@@ -84,13 +82,13 @@ clean:
 	$(call RUN_IDF_PY,fullclean)
 
 deploy:
-	$(call RUN_IDF_PY,$(DEVICE) flash)
+	$(call RUN_IDF_PY,flash)
 
 erase:
-	$(call RUN_IDF_PY,$(DEVICE) erase-flash)
+	$(call RUN_IDF_PY,erase-flash)
 
 monitor:
-	$(call RUN_IDF_PY,$(DEVICE) monitor)
+	$(call RUN_IDF_PY,monitor)
 
 size:
 	$(call RUN_IDF_PY,size)

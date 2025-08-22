@@ -35,7 +35,7 @@
 #include "py/mpthread.h"
 #include "gccollect.h"
 
-#if CONFIG_IDF_TARGET_ARCH_XTENSA
+#if CONFIG_IDF_TARGET_ESP32 || CONFIG_IDF_TARGET_ESP32S2 || CONFIG_IDF_TARGET_ESP32S3
 
 #include "xtensa/hal.h"
 
@@ -61,7 +61,8 @@ void gc_collect(void) {
     gc_collect_end();
 }
 
-#elif CONFIG_IDF_TARGET_ARCH_RISCV
+#elif CONFIG_IDF_TARGET_ESP32C3
+
 #include "shared/runtime/gchelper.h"
 
 void gc_collect(void) {
@@ -73,8 +74,6 @@ void gc_collect(void) {
     gc_collect_end();
 }
 
-#else
-#error unknown CONFIG_IDF_TARGET_ARCH
 #endif
 
 #if MICROPY_GC_SPLIT_HEAP_AUTO
