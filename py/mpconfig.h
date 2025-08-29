@@ -1924,7 +1924,7 @@ typedef double mp_float_t;
 #if MICROPY_PREVIEW_VERSION_2
 #define MICROPY_BANNER_NAME_AND_VERSION "MicroPython (with v2.0 preview) " MICROPY_GIT_TAG " on " MICROPY_BUILD_DATE
 #else
-#define MICROPY_BANNER_NAME_AND_VERSION "MicroPython " MICROPY_GIT_TAG " on " MICROPY_BUILD_DATE
+#define MICROPY_BANNER_NAME_AND_VERSION "LilyGo MicroPython firmware on " MICROPY_BUILD_DATE
 #endif
 #endif
 
