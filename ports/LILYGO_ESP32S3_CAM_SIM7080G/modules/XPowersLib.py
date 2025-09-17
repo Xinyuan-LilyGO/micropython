@@ -33,6 +33,7 @@ XPOWERS_AXP2101_LDO_ONOFF_CTRL0 = 0x90
 XPOWERS_AXP2101_LDO_ONOFF_CTRL1 = 0x91
 XPOWERS_AXP2101_LDO_VOL0_CTRL = 0x92
 XPOWERS_AXP2101_LDO_VOL1_CTRL = 0x93
+XPOWERS_AXP2101_LDO_VOL2_CTRL = 0x94
 XPOWERS_AXP2101_LDO_VOL3_CTRL = 0x95
 XPOWERS_AXP2101_LDO_VOL4_CTRL = 0x96
 XPOWERS_AXP2101_LDO_VOL5_CTRL = 0x97
@@ -131,7 +132,7 @@ XPOWERS_AXP2101_ALDO1_VOL_MAX = 3500
 XPOWERS_AXP2101_ALDO2_VOL_MAX = 3500
 XPOWERS_AXP2101_ALDO3_VOL_MAX = 3500
 XPOWERS_AXP2101_ALDO4_VOL_MAX = 3500
-
+XPOWERS_AXP2101_ALDO3_VOL_STEPS = 100
 XPOWERS_POWEROFF_4S = 0
 XPOWERS_POWEROFF_6S = 1
 XPOWERS_POWEROFF_8S = 2
@@ -796,9 +797,9 @@ class XPowersPMU:
         # Calculate the new value for the register
         val = self.readRegister(XPOWERS_AXP2101_LDO_VOL0_CTRL) & 0xE0
         val |= (millivolt - XPOWERS_AXP2101_ALDO1_VOL_MIN) // XPOWERS_AXP2101_ALDO1_VOL_STEPS
-        
+        self.writeRegister(XPOWERS_AXP2101_LDO_VOL0_CTRL, val)
         # Write the new value to the register
-        return self.writeRegister(XPOWERS_AXP2101_LDO_VOL0_CTRL, val) == 0
+        return True
 
     def setALDO2Voltage(self, millivolt):
         # Check if the voltage is a multiple of the step size
@@ -816,9 +817,28 @@ class XPowersPMU:
         # Calculate the new value for the register
         val = self.readRegister(XPOWERS_AXP2101_LDO_VOL1_CTRL) & 0xE0
         val |= (millivolt - XPOWERS_AXP2101_ALDO2_VOL_MIN) // XPOWERS_AXP2101_ALDO2_VOL_STEPS
-        
+        self.writeRegister(XPOWERS_AXP2101_LDO_VOL1_CTRL, val)
         # Write the new value to the register
-        return self.writeRegister(XPOWERS_AXP2101_LDO_VOL1_CTRL, val) == 0
+        return True
+    
+    def setALDO3Voltage(self, millivolt):
+        # Check if the voltage is a multiple of the step size
+        if millivolt % XPOWERS_AXP2101_ALDO3_VOL_STEPS:
+            print(f"Mistake! The steps must be a multiple of {XPOWERS_AXP2101_ALDO3_VOL_STEPS} mV")
+            return False
+        # Check if the voltage is within the valid range
+        if millivolt < XPOWERS_AXP2101_ALDO3_VOL_MIN:
+            print(f"Mistake! ALDO1 minimum output voltage is {XPOWERS_AXP2101_ALDO3_VOL_MIN} mV")
+            return False
+        elif millivolt > XPOWERS_AXP2101_ALDO3_VOL_MAX:
+            print(f"Mistake! ALDO1 maximum output voltage is {XPOWERS_AXP2101_ALDO3_VOL_MAX} mV")
+            return False
+
+        # Calculate the new value for the register
+        val = self.readRegister(XPOWERS_AXP2101_LDO_VOL2_CTRL) & 0xE0
+        val |= (millivolt - XPOWERS_AXP2101_ALDO3_VOL_MIN) // XPOWERS_AXP2101_ALDO3_VOL_STEPS
+        # Write the new value to the register
+        return self.writeRegister(XPOWERS_AXP2101_LDO_VOL2_CTRL, val) == 0
     
     def setALDO4Voltage(self, millivolt):
         # Check if the voltage is a multiple of the step size
@@ -836,9 +856,9 @@ class XPowersPMU:
         # Calculate the new value for the register
         val = self.readRegister(XPOWERS_AXP2101_LDO_VOL3_CTRL) & 0xE0
         val |= (millivolt - XPOWERS_AXP2101_ALDO4_VOL_MIN) // XPOWERS_AXP2101_ALDO4_VOL_STEPS
-        
+        self.writeRegister(XPOWERS_AXP2101_LDO_VOL3_CTRL, val)
         # Write the new value to the register
-        return self.writeRegister(XPOWERS_AXP2101_LDO_VOL3_CTRL, val) == 0
+        return True
     
     def enableALDO(self, num):
         if num == 1:
@@ -850,5 +870,8 @@ class XPowersPMU:
         elif num == 4:
             return self.setRegisterBit(XPOWERS_AXP2101_LDO_ONOFF_CTRL0, 3)
     
-    
+    def getALDO3Voltage(self):
+        val =  self.readRegister(XPOWERS_AXP2101_LDO_VOL2_CTRL) & 0x1F
+        return val * XPOWERS_AXP2101_ALDO3_VOL_STEPS + XPOWERS_AXP2101_ALDO3_VOL_MIN
+
 
